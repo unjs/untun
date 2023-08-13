@@ -1,7 +1,7 @@
 {
   "name": "untun",
   "version": "0.1.0",
-  "description": "Tunnel your local HTTP(s) server to the world! Powered by Cloudflare Quick Tunnels",
+  "description": "Tunnel your local HTTP(s) server to the world! Powered by Cloudflare Quick Tunnels.",
   "repository": "unjs/untun",
   "license": "MIT",
   "sideEffects": false,
@@ -21,6 +21,9 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "untun": "./bin/untun.mjs"
+  },
   "files": [
     "dist",
     "bin"
@@ -50,7 +53,7 @@
     "jiti": "^1.19.1",
     "prettier": "^3.0.1",
     "typescript": "^5.1.6",
-    "unbuild": "^1.2.1",
+    "unbuild": "^2.0.0-rc.0",
     "vitest": "^0.34.1"
   },
   "packageManager": "pnpm@8.6.12"
