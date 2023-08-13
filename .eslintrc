@@ -1,0 +1,6 @@
+{
+  "extends": ["eslint-config-unjs"],
+  "rules": {
+    "unicorn/consistent-function-scoping": 0
+  }
+}
