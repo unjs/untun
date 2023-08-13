@@ -32,8 +32,6 @@ export async function startTunnel(
 
   consola.start(`Starting cloudflared tunnel to ${url}`);
 
-  consola.log(cloudflaredBinPath);
-
   if (!existsSync(cloudflaredBinPath)) {
     consola.log(cloudflaredNotice);
     const canInstall = await consola.prompt(
