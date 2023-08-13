@@ -8,7 +8,7 @@
 
 Tunnel your local HTTP(s) server to the world!
 
-Powered by 🔥 [Cloudflare Quick Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/) and used by 👂 [unjs/listhen](https://github.com/unjs/listhen)!
+Powered by 🔥 [Cloudflare Quick Tunnels](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/) and used by 👂 [unjs/listhen](https://github.com/unjs/listhen).
 
 ## Usage (CLI)
 
