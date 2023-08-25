@@ -48,7 +48,7 @@ export async function startTunnel(
   }
 
   const args = [
-    ["--url", opts.url],
+    ["--url", url],
     opts.verifyTLS ? undefined : ["--no-tls-verify", ""],
   ].filter(Boolean) as [string, string][];
 
