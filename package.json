@@ -1,6 +1,6 @@
 {
   "name": "untun",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Tunnel your local HTTP(s) server to the world! Powered by Cloudflare Quick Tunnels.",
   "repository": "unjs/untun",
   "license": "MIT",
