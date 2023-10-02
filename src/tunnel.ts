@@ -7,6 +7,7 @@ export interface TunnelOptions {
   hostname?: string;
   protocol?: "http" | "https";
   verifyTLS?: boolean;
+  acceptCloudflareNotice?: boolean;
 }
 
 export interface Tunnel {
@@ -34,7 +35,7 @@ export async function startTunnel(
 
   if (!existsSync(cloudflaredBinPath)) {
     consola.log(cloudflaredNotice);
-    const canInstall = await consola.prompt(
+    const canInstall = opts.acceptCloudflareNotice || await consola.prompt(
       `Do you agree with the above terms and wish to install the binary from GitHub?`,
       {
         type: "confirm",
