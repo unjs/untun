@@ -35,7 +35,7 @@ export async function startTunnel(
 
   if (!existsSync(cloudflaredBinPath)) {
     consola.log(cloudflaredNotice);
-    const canInstall = opts.acceptCloudflareNotice || await consola.prompt(
+    const canInstall = (opts.acceptCloudflareNotice || process.env.UNTUN_ACCEPT_CLOUDFLARE_NOTICE) || await consola.prompt(
       `Do you agree with the above terms and wish to install the binary from GitHub?`,
       {
         type: "confirm",
