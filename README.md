@@ -89,6 +89,13 @@ The local server protocol (only effective if `url` is not provided).
 
 Verify local server TLS certificate.
 
+### `acceptCloudflareNotice`
+
+- Default: `false`
+- Environment variable: `UNTUN_ACCEPT_CLOUDFLARE_NOTICE`
+
+Accept cloudflare TOS by default.
+
 ## Development
 
 - Clone this repository
