@@ -45,10 +45,10 @@
     "pathe": "^1.1.1"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.10.5",
     "@vitest/coverage-v8": "^1.0.4",
     "changelogen": "^0.5.5",
-    "eslint": "^8.55.0",
+    "eslint": "^8.56.0",
     "eslint-config-unjs": "^0.2.1",
     "jiti": "^1.21.0",
     "prettier": "^3.1.1",
@@ -56,5 +56,5 @@
     "unbuild": "^2.0.0",
     "vitest": "^1.0.4"
   },
-  "packageManager": "pnpm@8.11.0"
+  "packageManager": "pnpm@8.12.1"
 }
