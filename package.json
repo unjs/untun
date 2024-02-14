@@ -40,21 +40,21 @@
     "untun": "jiti ./scripts/untun.mjs"
   },
   "dependencies": {
-    "citty": "^0.1.5",
+    "citty": "^0.1.6",
     "consola": "^3.2.3",
     "pathe": "^1.1.2"
   },
   "devDependencies": {
-    "@types/node": "^20.11.5",
-    "@vitest/coverage-v8": "^1.2.1",
+    "@types/node": "^20.11.17",
+    "@vitest/coverage-v8": "^1.2.2",
     "changelogen": "^0.5.5",
     "eslint": "^8.56.0",
     "eslint-config-unjs": "^0.2.1",
     "jiti": "^1.21.0",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.2"
   },
-  "packageManager": "pnpm@8.14.2"
+  "packageManager": "pnpm@8.15.2"
 }
