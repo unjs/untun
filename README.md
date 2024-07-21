@@ -96,6 +96,21 @@ Verify local server TLS certificate.
 
 Accept cloudflare TOS by default.
 
+### `extraArgs`
+
+- Default: ""
+
+Extra CLI arguments to provide to cloudflared.
+
+Example:
+
+```ts
+const tunnel = await startTunnel({
+  port: 3000,
+  extraArgs: "--no-autoupdate"
+});
+```
+
 ## Development
 
 - Clone this repository
