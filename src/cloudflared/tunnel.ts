@@ -20,7 +20,7 @@ import {
  */
 export function startCloudflaredTunnel(
   options: Record<string, string | number | null> = {},
-  extraArgs : Array<string> = []
+  extraArgs: Array<string> = [],
 ): {
   /** The URL of the tunnel */
   url: Promise<string>;
@@ -41,10 +41,10 @@ export function startCloudflaredTunnel(
       args.push(`${key}`);
     }
   }
-  if (!options['--url']) {
+  if (!options["--url"]) {
     args.push("--url", "localhost:8080");
   }
-  
+
   if (Array.isArray(extraArgs)) {
     args.push(...extraArgs);
   }

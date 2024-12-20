@@ -54,10 +54,13 @@ export async function startTunnel(
 
   const args = [
     ["--url", url],
-    opts.verifyTLS ? undefined : ["--no-tls-verify", null],
+    opts.verifyTLS ? undefined : ["--no-tls-verify", undefined],
   ].filter(Boolean) as [string, string][];
 
-  const tunnel = await startCloudflaredTunnel(Object.fromEntries(args), opts.extraArgs);
+  const tunnel = await startCloudflaredTunnel(
+    Object.fromEntries(args),
+    opts.extraArgs,
+  );
 
   const cleanup = async () => {
     await tunnel.stop();
