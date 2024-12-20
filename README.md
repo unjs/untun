@@ -98,7 +98,7 @@ Accept cloudflare TOS by default.
 
 ### `extraArgs`
 
-- Default: ""
+- Default: []
 
 Extra CLI arguments to provide to cloudflared.
 
@@ -107,7 +107,7 @@ Example:
 ```ts
 const tunnel = await startTunnel({
   port: 3000,
-  extraArgs: "--no-autoupdate"
+  extraArgs: ["--no-autoupdate"]
 });
 ```
 

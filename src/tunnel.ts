@@ -8,7 +8,7 @@ export interface TunnelOptions {
   protocol?: "http" | "https";
   verifyTLS?: boolean;
   acceptCloudflareNotice?: boolean;
-  extraArgs?: string;
+  extraArgs?: Array<string>;
 }
 
 export interface Tunnel {
