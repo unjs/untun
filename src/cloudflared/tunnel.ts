@@ -20,6 +20,7 @@ import {
  */
 export function startCloudflaredTunnel(
   options: Record<string, string | number | null> = {},
+  extraArgs: Array<string> = [],
 ): {
   /** The URL of the tunnel */
   url: Promise<string>;
@@ -40,8 +41,12 @@ export function startCloudflaredTunnel(
       args.push(`${key}`);
     }
   }
-  if (args.length === 1) {
+  if (!options["--url"]) {
     args.push("--url", "localhost:8080");
+  }
+
+  if (Array.isArray(extraArgs)) {
+    args.push(...extraArgs);
   }
 
   const child = spawn(cloudflaredBinPath, args, {

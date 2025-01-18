@@ -8,6 +8,7 @@ export interface TunnelOptions {
   protocol?: "http" | "https";
   verifyTLS?: boolean;
   acceptCloudflareNotice?: boolean;
+  extraArgs?: Array<string>;
 }
 
 export interface Tunnel {
@@ -53,10 +54,13 @@ export async function startTunnel(
 
   const args = [
     ["--url", url],
-    opts.verifyTLS ? undefined : ["--no-tls-verify", ""],
+    opts.verifyTLS ? undefined : ["--no-tls-verify", undefined],
   ].filter(Boolean) as [string, string][];
 
-  const tunnel = await startCloudflaredTunnel(Object.fromEntries(args));
+  const tunnel = await startCloudflaredTunnel(
+    Object.fromEntries(args),
+    opts.extraArgs,
+  );
 
   const cleanup = async () => {
     await tunnel.stop();
