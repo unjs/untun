@@ -124,5 +124,5 @@ Your installation of cloudflared software constitutes a symbol of your signature
 [codecov-href]: https://codecov.io/gh/unjs/untun
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/untun?style=flat&colorA=18181B&colorB=F0DB4F
 [bundle-href]: https://bundlephobia.com/result?p=untun
-[license-src]: https://img.shields.io/github/license/unjs/untun.svg?style=flat&colorA=18181B&colorB=F0DB4F
+[license-src]: https://img.shields.io/badge/License-MIT-green.svg?style=flat&colorA=18181B&colorB=F0DB4F
 [license-href]: https://github.com/unjs/untun/blob/main/LICENSE
