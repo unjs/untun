@@ -30,8 +30,10 @@ export const tunnel = defineCommand({
     },
   },
   async run({ args }) {
-    const tunnel = await startTunnel({
-      url: args.url,
+    const tunnel = await startTunnel(args.url ? { url: args.url } : {
+      port: args.port,
+      hostname: args.hostname,
+      protocol: args.protocol as 'http' | 'https' | undefined
     });
 
     if (!tunnel) {
