@@ -34,8 +34,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(eslint@8.57.0)(typescript@5.4.5)
       jiti:
-        specifier: ^1.21.0
-        version: 1.21.0
+        specifier: ^2.4.2
+        version: 2.4.2
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -1738,6 +1738,10 @@ packages:
 
   jiti@1.21.0:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
+    hasBin: true
+
+  jiti@2.4.2:
+    resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
     hasBin: true
 
   js-tokens@4.0.0:
@@ -4627,6 +4631,8 @@ snapshots:
       istanbul-lib-report: 3.0.1
 
   jiti@1.21.0: {}
+
+  jiti@2.4.2: {}
 
   js-tokens@4.0.0: {}
 
