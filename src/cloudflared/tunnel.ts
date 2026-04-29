@@ -4,23 +4,15 @@
  * Check main license for more information
  */
 import { spawn, ChildProcess } from "node:child_process";
-import type { Connection } from "./types";
-import {
-  cloudflaredBinPath,
-  connRegex,
-  ipRegex,
-  locationRegex,
-  indexRegex,
-} from "./constants";
+import type { Connection } from "./types.ts";
+import { cloudflaredBinPath, connRegex, ipRegex, locationRegex, indexRegex } from "./constants.ts";
 
 /**
  *  Create a tunnel.
  * @param options The options to pass to cloudflared.
  * @returns
  */
-export function startCloudflaredTunnel(
-  options: Record<string, string | number | null> = {},
-): {
+export function startCloudflaredTunnel(options: Record<string, string | number | null> = {}): {
   /** The URL of the tunnel */
   url: Promise<string>;
   /** The connections of the tunnel */
@@ -54,16 +46,11 @@ export function startCloudflaredTunnel(
   }
 
   const urlRegex = /\|\s+(https?:\/\/\S+)/;
-  let urlResolver: (value: string | PromiseLike<string>) => void = () =>
-    undefined;
+  let urlResolver: (value: string | PromiseLike<string>) => void = () => undefined;
   let urlRejector: (reason: unknown) => void = () => undefined;
-  const url = new Promise<string>(
-    (...pair) => ([urlResolver, urlRejector] = pair),
-  );
+  const url = new Promise<string>((...pair) => ([urlResolver, urlRejector] = pair));
 
-  const connectionResolvers: ((
-    value: Connection | PromiseLike<Connection>,
-  ) => void)[] = [];
+  const connectionResolvers: ((value: Connection | PromiseLike<Connection>) => void)[] = [];
   const connectionRejectors: ((reason: unknown) => void)[] = [];
   const connections: Promise<Connection>[] = [];
   for (let i = 0; i < 1; i++) {
@@ -78,7 +65,9 @@ export function startCloudflaredTunnel(
     const str = data.toString();
 
     const urlMatch = str.match(urlRegex);
-    urlMatch && urlResolver(urlMatch[1]);
+    if (urlMatch) {
+      urlResolver(urlMatch[1]);
+    }
 
     const connMatch = str.match(connRegex);
     const ipMatch = str.match(ipRegex);
