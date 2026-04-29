@@ -7,11 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import https from "node:https";
 import { execSync } from "node:child_process";
-import {
-  CLOUDFLARED_VERSION,
-  RELEASE_BASE,
-  cloudflaredBinPath,
-} from "./constants";
+import { CLOUDFLARED_VERSION, RELEASE_BASE, cloudflaredBinPath } from "./constants.ts";
 
 const LINUX_URL: Partial<Record<typeof process.arch, string>> = {
   arm64: "cloudflared-linux-arm64",
@@ -45,7 +41,7 @@ function resolveBase(version: string): string {
  */
 export function installCloudflared(
   to: string = cloudflaredBinPath,
-  version = CLOUDFLARED_VERSION,
+  version: string = CLOUDFLARED_VERSION,
 ): Promise<string> {
   switch (process.platform) {
     case "linux": {
@@ -65,7 +61,7 @@ export function installCloudflared(
 
 export async function installLinux(
   to: string,
-  version = CLOUDFLARED_VERSION,
+  version: string = CLOUDFLARED_VERSION,
 ): Promise<string> {
   const file = LINUX_URL[process.arch];
 
@@ -80,7 +76,7 @@ export async function installLinux(
 
 export async function installMacos(
   to: string,
-  version = CLOUDFLARED_VERSION,
+  version: string = CLOUDFLARED_VERSION,
 ): Promise<string> {
   const file = MACOS_URL[process.arch];
 
@@ -89,7 +85,9 @@ export async function installMacos(
   }
 
   await download(resolveBase(version) + file, `${to}.tgz`);
-  process.env.DEBUG && console.log(`Extracting to ${to}`);
+  if (process.env.DEBUG) {
+    console.log(`Extracting to ${to}`);
+  }
   execSync(`tar -xzf ${path.basename(`${to}.tgz`)}`, { cwd: path.dirname(to) });
   fs.unlinkSync(`${to}.tgz`);
   fs.renameSync(`${path.dirname(to)}/cloudflared`, to);
@@ -97,7 +95,7 @@ export async function installMacos(
 }
 export async function installWindows(
   to: string,
-  version = CLOUDFLARED_VERSION,
+  version: string = CLOUDFLARED_VERSION,
 ): Promise<string> {
   const file = WINDOWS_URL[process.arch];
 
@@ -111,9 +109,13 @@ export async function installWindows(
 
 function download(url: string, to: string, redirect = 0): Promise<string> {
   if (redirect === 0) {
-    process.env.DEBUG && console.log(`Downloading ${url} to ${to}`);
+    if (process.env.DEBUG) {
+      console.log(`Downloading ${url} to ${to}`);
+    }
   } else {
-    process.env.DEBUG && console.log(`Redirecting to ${url}`);
+    if (process.env.DEBUG) {
+      console.log(`Redirecting to ${url}`);
+    }
   }
 
   return new Promise<string>((resolve, reject) => {

@@ -1,6 +1,5 @@
 # Changelog
 
-
 ## v0.1.3
 
 [compare changes](https://github.com/unjs/untun/compare/v0.1.2...v0.1.3)
@@ -41,7 +40,6 @@
 
 ## v0.1.1
 
-
 ### 🩹 Fixes
 
 - Remove accidental log ([0602be3](https://github.com/unjs/untun/commit/0602be3))
@@ -51,7 +49,6 @@
 
 - Update readme. ([53a1e8c](https://github.com/unjs/untun/commit/53a1e8c))
 
-### ❤️  Contributors
+### ❤️ Contributors
 
 - Pooya Parsa ([@pi0](http://github.com/pi0))
-

@@ -1,9 +1,9 @@
-import { defineCommand, runMain as _runMain } from "citty";
+import { defineCommand, type CommandDef, runMain as _runMain } from "citty";
 import consola from "consola";
-import { name, description, version } from "../package.json";
-import { startTunnel } from "./tunnel";
+import pkg from "../package.json" with { type: "json" };
+import { startTunnel } from "./tunnel.ts";
 
-export const tunnel = defineCommand({
+export const tunnel: CommandDef<any> = defineCommand({
   meta: {
     name: "tunnel",
     description: "Create a tunnel to a local server",
@@ -31,7 +31,7 @@ export const tunnel = defineCommand({
   },
   async run({ args }) {
     const tunnel = await startTunnel({
-      url: args.url,
+      url: args.url as string,
     });
 
     if (!tunnel) {
@@ -45,15 +45,15 @@ export const tunnel = defineCommand({
   },
 });
 
-export const main = defineCommand({
+export const main: CommandDef<any> = defineCommand({
   meta: {
-    name,
-    description,
-    version,
+    name: pkg.name,
+    description: pkg.description,
+    version: pkg.version,
   },
   subCommands: {
     tunnel,
   },
 });
 
-export const runMain = () => _runMain(main);
+export const runMain: () => Promise<void> = () => _runMain(main);
