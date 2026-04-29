@@ -63,7 +63,7 @@ export interface Tunnel {
  *  protocol: "https",
  *  port: "443",
  *  hostname: "example.com",
- *  verifyTLS: true
+ *  verifyTLS: true,
  *  acceptCloudflareNotice: true
  * };
  * const tunnel = await startTunnel(tunnelOptions);
