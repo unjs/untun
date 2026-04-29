@@ -12,7 +12,10 @@ import { cloudflaredBinPath, connRegex, ipRegex, locationRegex, indexRegex } fro
  * @param options The options to pass to cloudflared.
  * @returns
  */
-export function startCloudflaredTunnel(options: Record<string, string | number | null> = {}): {
+export function startCloudflaredTunnel(
+  options: Record<string, string | number | null> = {},
+  extraArgs: Array<string> = [],
+): {
   /** The URL of the tunnel */
   url: Promise<string>;
   /** The connections of the tunnel */
@@ -32,8 +35,12 @@ export function startCloudflaredTunnel(options: Record<string, string | number |
       args.push(`${key}`);
     }
   }
-  if (args.length === 1) {
+  if (!options["--url"]) {
     args.push("--url", "localhost:8080");
+  }
+
+  if (Array.isArray(extraArgs)) {
+    args.push(...extraArgs);
   }
 
   const child = spawn(cloudflaredBinPath, args, {

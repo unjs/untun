@@ -37,6 +37,7 @@ export interface TunnelOptions {
    * @optional
    */
   acceptCloudflareNotice?: boolean;
+  extraArgs?: Array<string>;
 }
 
 export interface Tunnel {
@@ -101,7 +102,7 @@ export async function startTunnel(opts: TunnelOptions): Promise<undefined | Tunn
     Boolean,
   ) as [string, string][];
 
-  const tunnel = await startCloudflaredTunnel(Object.fromEntries(args));
+  const tunnel = await startCloudflaredTunnel(Object.fromEntries(args), opts.extraArgs);
 
   const cleanup = async () => {
     await tunnel.stop();
