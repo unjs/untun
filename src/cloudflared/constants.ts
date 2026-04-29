@@ -6,7 +6,7 @@
 import { tmpdir } from "node:os";
 import path from "pathe";
 
-export const CLOUDFLARED_VERSION: string = process.env.CLOUDFLARED_VERSION || "2023.10.0";
+export const CLOUDFLARED_VERSION: string = process.env.CLOUDFLARED_VERSION || "2026.3.0";
 
 export const RELEASE_BASE = "https://github.com/cloudflare/cloudflared/releases/";
 
