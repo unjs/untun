@@ -36,8 +36,3 @@ export const connRegex: RegExp = /connection[ =]([\da-z-]+)/i;
 export const ipRegex: RegExp = /ip=([\d.]+)/;
 export const locationRegex: RegExp = /location=([A-Z]+)/;
 export const indexRegex: RegExp = /connIndex=(\d)/;
-export const tunnelIDRegex: RegExp = /tunnelid=([\da-z-]+)/i;
-export const connectorIDRegex: RegExp = /connector id: ([\da-z-]+)/i;
-export const metricsRegex: RegExp = /metrics server on ([\d.:]+\/metrics)/;
-export const configRegex: RegExp = /config="(.+[^\\])"/;
-export const disconnectRegex: RegExp = /unregistered tunnel connection connindex=(\d)/i;

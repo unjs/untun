@@ -6,10 +6,3 @@
 export { cloudflaredBinPath, cloudflaredNotice } from "./constants.ts";
 export { installCloudflared } from "./install.ts";
 export { startCloudflaredTunnel } from "./tunnel.ts";
-export {
-  service,
-  identifier,
-  MACOS_SERVICE_PATH,
-  AlreadyInstalledError,
-  NotInstalledError,
-} from "./service.ts";
