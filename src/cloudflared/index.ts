@@ -3,13 +3,13 @@
  *
  * Check main license for more information
  */
-export { cloudflaredBinPath, cloudflaredNotice } from "./constants";
-export { installCloudflared } from "./install";
-export { startCloudflaredTunnel } from "./tunnel";
+export { cloudflaredBinPath, cloudflaredNotice } from "./constants.ts";
+export { installCloudflared } from "./install.ts";
+export { startCloudflaredTunnel } from "./tunnel.ts";
 export {
   service,
   identifier,
   MACOS_SERVICE_PATH,
   AlreadyInstalledError,
   NotInstalledError,
-} from "./service";
+} from "./service.ts";

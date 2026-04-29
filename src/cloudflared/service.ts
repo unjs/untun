@@ -6,7 +6,7 @@
 import os from "node:os";
 import fs from "node:fs";
 import { spawnSync } from "node:child_process";
-import { Connection } from "./types";
+import { type Connection } from "./types.ts";
 import {
   cloudflaredBinPath,
   configRegex,
@@ -18,7 +18,7 @@ import {
   locationRegex,
   metricsRegex,
   tunnelIDRegex,
-} from "./constants";
+} from "./constants.ts";
 
 /**
  * Cloudflared launchd identifier.
@@ -36,7 +36,11 @@ export const serviceName = "cloudflared.service";
  * Path of service related files.
  * @platform macOS
  */
-export const MACOS_SERVICE_PATH = {
+export const MACOS_SERVICE_PATH: {
+  PLIST: string;
+  OUT: string;
+  ERR: string;
+} = {
   PLIST: isRoot()
     ? `/Library/LaunchDaemons/${identifier}.plist`
     : `${os.homedir()}/Library/LaunchAgents/${identifier}.plist`,
@@ -46,23 +50,37 @@ export const MACOS_SERVICE_PATH = {
   ERR: isRoot()
     ? `/Library/Logs/${identifier}.err.log`
     : `${os.homedir()}/Library/Logs/${identifier}.err.log`,
-} as const;
+};
 
 /**
  * Path of service related files.
  * @platform linux
  */
-export const LINUX_SERVICE_PATH = {
+export const LINUX_SERVICE_PATH: {
+  SYSTEMD: string;
+  SERVICE: string;
+  SERVICE_OUT: string;
+  SERVICE_ERR: string;
+} = {
   SYSTEMD: `/etc/systemd/system/${serviceName}`,
   SERVICE: "/etc/init.d/cloudflared",
   SERVICE_OUT: "/var/log/cloudflared.log",
   SERVICE_ERR: "/var/log/cloudflared.err",
-} as const;
+};
 
 /**
  * Cloudflared Service API.
  */
-export const service = {
+export const service: {
+  install: typeof install;
+  uninstall: typeof uninstall;
+  exists: typeof exists;
+  log: typeof log;
+  err: typeof err;
+  current: typeof current;
+  clean: typeof clean;
+  journal: typeof journal;
+} = {
   install,
   uninstall,
   exists,
@@ -267,9 +285,7 @@ export function current(): {
       } else if (metricsRegex.test(line)) {
         metrics = line.match(metricsRegex)?.[1] ?? "";
       } else if (configRegex.test(line)) {
-        config = JSON.parse(
-          line.match(configRegex)?.[1].replace(/\\/g, "") ?? "{}",
-        );
+        config = JSON.parse(line.match(configRegex)?.[1].replace(/\\/g, "") ?? "{}");
       }
     } catch (error) {
       if (process.env.DEBUG) {

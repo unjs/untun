@@ -6,16 +6,14 @@
 import { tmpdir } from "node:os";
 import path from "pathe";
 
-export const CLOUDFLARED_VERSION =
-  process.env.CLOUDFLARED_VERSION || "2023.10.0";
+export const CLOUDFLARED_VERSION: string = process.env.CLOUDFLARED_VERSION || "2023.10.0";
 
-export const RELEASE_BASE =
-  "https://github.com/cloudflare/cloudflared/releases/";
+export const RELEASE_BASE = "https://github.com/cloudflare/cloudflared/releases/";
 
 /**
  * The path to the cloudflared binary.
  */
-export const cloudflaredBinPath = path.join(
+export const cloudflaredBinPath: string = path.join(
   tmpdir(),
   "node-untun",
   process.platform === "win32"
@@ -34,12 +32,12 @@ export const cloudflaredNotice = `
 
 // Regexes
 
-export const connRegex = /connection[ =]([\da-z-]+)/i;
-export const ipRegex = /ip=([\d.]+)/;
-export const locationRegex = /location=([A-Z]+)/;
-export const indexRegex = /connIndex=(\d)/;
-export const tunnelIDRegex = /tunnelid=([\da-z-]+)/i;
-export const connectorIDRegex = /connector id: ([\da-z-]+)/i;
-export const metricsRegex = /metrics server on ([\d.:]+\/metrics)/;
-export const configRegex = /config="(.+[^\\])"/;
-export const disconnectRegex = /unregistered tunnel connection connindex=(\d)/i;
+export const connRegex: RegExp = /connection[ =]([\da-z-]+)/i;
+export const ipRegex: RegExp = /ip=([\d.]+)/;
+export const locationRegex: RegExp = /location=([A-Z]+)/;
+export const indexRegex: RegExp = /connIndex=(\d)/;
+export const tunnelIDRegex: RegExp = /tunnelid=([\da-z-]+)/i;
+export const connectorIDRegex: RegExp = /connector id: ([\da-z-]+)/i;
+export const metricsRegex: RegExp = /metrics server on ([\d.:]+\/metrics)/;
+export const configRegex: RegExp = /config="(.+[^\\])"/;
+export const disconnectRegex: RegExp = /unregistered tunnel connection connindex=(\d)/i;

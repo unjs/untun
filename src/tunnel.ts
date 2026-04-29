@@ -70,21 +70,12 @@ export interface Tunnel {
  * console.log(await tunnel.getURL());
  * await tunnel.close();
  */
-export async function startTunnel(
-  opts: TunnelOptions,
-): Promise<undefined | Tunnel> {
-  const {
-    installCloudflared,
-    startCloudflaredTunnel,
-    cloudflaredBinPath,
-    cloudflaredNotice,
-  } = await import("./cloudflared");
+export async function startTunnel(opts: TunnelOptions): Promise<undefined | Tunnel> {
+  const { installCloudflared, startCloudflaredTunnel, cloudflaredBinPath, cloudflaredNotice } =
+    await import("./cloudflared/index.ts");
 
   const url =
-    opts.url ||
-    `${opts.protocol || "http"}://${opts.hostname ?? "localhost"}:${
-      opts.port ?? 3000
-    }`;
+    opts.url || `${opts.protocol || "http"}://${opts.hostname ?? "localhost"}:${opts.port ?? 3000}`;
 
   consola.start(`Starting cloudflared tunnel to ${url}`);
 
@@ -106,10 +97,9 @@ export async function startTunnel(
     await installCloudflared();
   }
 
-  const args = [
-    ["--url", url],
-    opts.verifyTLS ? undefined : ["--no-tls-verify", ""],
-  ].filter(Boolean) as [string, string][];
+  const args = [["--url", url], opts.verifyTLS ? undefined : ["--no-tls-verify", ""]].filter(
+    Boolean,
+  ) as [string, string][];
 
   const tunnel = await startCloudflaredTunnel(Object.fromEntries(args));
 
