@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import consola from "consola";
+import { log, prompt } from "./log.ts";
 
 export interface TunnelOptions {
   /**
@@ -78,21 +78,18 @@ export async function startTunnel(opts: TunnelOptions): Promise<undefined | Tunn
   const url =
     opts.url || `${opts.protocol || "http"}://${opts.hostname ?? "localhost"}:${opts.port ?? 3000}`;
 
-  consola.start(`Starting cloudflared tunnel to ${url}`);
+  log(`Starting cloudflared tunnel to ${url}`, "info");
 
   if (!existsSync(cloudflaredBinPath)) {
-    consola.log(cloudflaredNotice);
+    log(cloudflaredNotice);
     const canInstall =
       opts.acceptCloudflareNotice ||
       process.env.UNTUN_ACCEPT_CLOUDFLARE_NOTICE ||
-      (await consola.prompt(
+      (await prompt(
         `Do you agree with the above terms and wish to install the binary from GitHub?`,
-        {
-          type: "confirm",
-        },
       ));
     if (!canInstall) {
-      consola.fail("Skipping tunnel setup.");
+      log("Skipping tunnel setup.", "error");
       return;
     }
     await installCloudflared();

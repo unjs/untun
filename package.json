@@ -30,11 +30,6 @@
     "test": "pnpm lint && pnpm typecheck &&  vitest run --coverage",
     "untun": "node scripts/untun.ts"
   },
-  "dependencies": {
-    "citty": "^0.2.2",
-    "consola": "^3.4.2",
-    "pathe": "^2.0.3"
-  },
   "devDependencies": {
     "@types/node": "^25.6.0",
     "@typescript/native-preview": "7.0.0-dev.20260429.1",

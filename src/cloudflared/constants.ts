@@ -4,7 +4,7 @@
  * Check main license for more information
  */
 import { tmpdir } from "node:os";
-import path from "pathe";
+import path from "node:path";
 
 export const CLOUDFLARED_VERSION: string = process.env.CLOUDFLARED_VERSION || "2026.3.0";
 
@@ -25,9 +25,9 @@ export const cloudflaredNotice = `
 🔥 Your installation of cloudflared software constitutes a symbol of your signature
    indicating that you accept the terms of the Cloudflare License, Terms and Privacy Policy.
 
-❯ License:         \`https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/license/\`
-❯ Terms:           \`https://www.cloudflare.com/terms/\`
-❯ Privacy Policy:  \`https://www.cloudflare.com/privacypolicy/\`
+❯ License:         https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/license/
+❯ Terms:           https://www.cloudflare.com/terms/
+❯ Privacy Policy:  https://www.cloudflare.com/privacypolicy/
 `;
 
 // Regexes
