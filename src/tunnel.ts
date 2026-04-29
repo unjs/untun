@@ -1,4 +1,5 @@
 import { existsSync } from "node:fs";
+import { constants as osConstants } from "node:os";
 import { log, prompt } from "./log.ts";
 
 export interface TunnelOptions {
@@ -95,23 +96,37 @@ export async function startTunnel(opts: TunnelOptions): Promise<undefined | Tunn
     await installCloudflared();
   }
 
-  const args = [["--url", url], opts.verifyTLS ? undefined : ["--no-tls-verify", ""]].filter(
+  const args = [["--url", url], opts.verifyTLS ? undefined : ["--no-tls-verify", null]].filter(
     Boolean,
-  ) as [string, string][];
+  ) as [string, string | null][];
 
-  const tunnel = await startCloudflaredTunnel(Object.fromEntries(args), opts.extraArgs);
+  const tunnel = startCloudflaredTunnel(Object.fromEntries(args), opts.extraArgs);
 
-  const cleanup = async () => {
+  let closed = false;
+  const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
+  const handlers = new Map<NodeJS.Signals, () => void>();
+
+  const cleanup = async (): Promise<void> => {
+    if (closed) return;
+    closed = true;
+    for (const [sig, handler] of handlers) process.off(sig, handler);
+    handlers.clear();
     await tunnel.stop();
   };
-  for (const signal of ["SIGINT", "SIGUSR1", "SIGUSR2"] as const) {
-    process.once(signal, cleanup);
+
+  for (const signal of signals) {
+    const handler = () => {
+      cleanup().finally(() => {
+        const signo = osConstants.signals[signal] ?? 0;
+        process.exit(128 + signo);
+      });
+    };
+    handlers.set(signal, handler);
+    process.once(signal, handler);
   }
 
   return {
-    getURL: async () => await tunnel.url,
-    close: async () => {
-      await cleanup();
-    },
+    getURL: () => tunnel.url,
+    close: cleanup,
   };
 }

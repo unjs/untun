@@ -3,7 +3,8 @@
  *
  * Check main license for more information
  */
-import { spawn, ChildProcess } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
+import { once } from "node:events";
 import type { Connection } from "./types.ts";
 import { cloudflaredBinPath, connRegex, ipRegex, locationRegex, indexRegex } from "./constants.ts";
 
@@ -22,8 +23,8 @@ export function startCloudflaredTunnel(
   connections: Promise<Connection>[];
   /** Spwaned cloudflared process */
   child: ChildProcess;
-  /** Stop the cloudflared process */
-  stop: ChildProcess["kill"];
+  /** Stop the cloudflared process and wait for it to exit */
+  stop: () => Promise<void>;
 } {
   const args: string[] = ["tunnel"];
   for (const [key, value] of Object.entries(options)) {
@@ -56,6 +57,8 @@ export function startCloudflaredTunnel(
   let urlResolver: (value: string | PromiseLike<string>) => void = () => undefined;
   let urlRejector: (reason: unknown) => void = () => undefined;
   const url = new Promise<string>((...pair) => ([urlResolver, urlRejector] = pair));
+  // Avoid unhandled-rejection warnings if no consumer awaits before child fails.
+  url.catch(() => undefined);
 
   const connectionResolvers: ((value: Connection | PromiseLike<Connection>) => void)[] = [];
   const connectionRejectors: ((reason: unknown) => void)[] = [];
@@ -90,8 +93,28 @@ export function startCloudflaredTunnel(
   };
   child.stdout.on("data", parser).on("error", urlRejector);
   child.stderr.on("data", parser).on("error", urlRejector);
+  child.on("error", urlRejector);
+  child.on("exit", (code, signal) => {
+    const reason = new Error(
+      `cloudflared exited (code=${code}, signal=${signal}) before URL was ready`,
+    );
+    urlRejector(reason);
+    for (const reject of connectionRejectors) reject?.(reason);
+  });
 
-  const stop = () => child.kill("SIGINT");
+  const stop = async (): Promise<void> => {
+    if (child.exitCode !== null || child.signalCode !== null) return;
+    const exited = once(child, "exit");
+    child.kill("SIGINT");
+    const killTimer = setTimeout(() => {
+      if (child.exitCode === null && child.signalCode === null) child.kill("SIGKILL");
+    }, 5000);
+    try {
+      await exited;
+    } finally {
+      clearTimeout(killTimer);
+    }
+  };
 
   return { url, connections, child, stop };
 }
