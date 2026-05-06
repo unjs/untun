@@ -31,15 +31,15 @@
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
-    "@typescript/native-preview": "7.0.0-dev.20260429.1",
+    "@typescript/native-preview": "7.0.0-dev.20260506.1",
     "@vitest/coverage-v8": "^4.1.5",
     "changelogen": "^0.6.2",
     "eslint-config-unjs": "^0.6.2",
-    "obuild": "^0.4.33",
-    "oxfmt": "^0.47.0",
-    "oxlint": "^1.62.0",
+    "obuild": "^0.4.34",
+    "oxfmt": "^0.48.0",
+    "oxlint": "^1.63.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.5"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.3"
 }
