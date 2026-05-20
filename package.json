@@ -30,16 +30,16 @@
     "untun": "node src/cli.ts"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0",
-    "@typescript/native-preview": "7.0.0-dev.20260429.1",
-    "@vitest/coverage-v8": "^4.1.5",
+    "@types/node": "^25.9.1",
+    "@typescript/native-preview": "7.0.0-dev.20260519.1",
+    "@vitest/coverage-v8": "^4.1.7",
     "changelogen": "^0.6.2",
     "eslint-config-unjs": "^0.6.2",
-    "obuild": "^0.4.33",
-    "oxfmt": "^0.47.0",
-    "oxlint": "^1.62.0",
+    "obuild": "^0.4.35",
+    "oxfmt": "^0.51.0",
+    "oxlint": "^1.66.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.7"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.4"
 }
