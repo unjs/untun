@@ -9,34 +9,34 @@ importers:
   .:
     devDependencies:
       '@types/node':
-        specifier: ^25.6.0
+        specifier: 25.6.0
         version: 25.6.0
       '@typescript/native-preview':
         specifier: 7.0.0-dev.20260429.1
         version: 7.0.0-dev.20260429.1
       '@vitest/coverage-v8':
-        specifier: ^4.1.5
+        specifier: 4.1.5
         version: 4.1.5(vitest@4.1.5)
       changelogen:
-        specifier: ^0.6.2
+        specifier: 0.6.2
         version: 0.6.2(magicast@0.5.2)
       eslint-config-unjs:
-        specifier: ^0.6.2
+        specifier: 0.6.2
         version: 0.6.2(eslint@10.2.1(jiti@2.6.1))(typescript@6.0.3)
       obuild:
-        specifier: ^0.4.33
+        specifier: 0.4.33
         version: 0.4.33(@typescript/native-preview@7.0.0-dev.20260429.1)(chokidar@5.0.0)(dotenv@17.4.2)(giget@3.2.0)(jiti@2.6.1)(magicast@0.5.2)(picomatch@4.0.4)(rollup@4.60.2)(typescript@6.0.3)
       oxfmt:
-        specifier: ^0.47.0
+        specifier: 0.47.0
         version: 0.47.0
       oxlint:
-        specifier: ^1.62.0
+        specifier: 1.62.0
         version: 1.62.0
       typescript:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
       vitest:
-        specifier: ^4.1.5
+        specifier: 4.1.5
         version: 4.1.5(@types/node@25.6.0)(@vitest/coverage-v8@4.1.5)(vite@8.0.10(@types/node@25.6.0)(jiti@2.6.1))
 
 packages:
