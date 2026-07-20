@@ -71,8 +71,17 @@ export function startCloudflaredTunnel(
     );
   }
 
+  // Keep the tail of cloudflared output so a premature exit can explain itself.
+  const recentOutput: string[] = [];
+
   const parser = (data: Buffer) => {
     const str = data.toString();
+
+    for (const line of str.split("\n")) {
+      if (!line.trim()) continue;
+      recentOutput.push(line.trim());
+      if (recentOutput.length > 10) recentOutput.shift();
+    }
 
     const urlMatch = str.match(urlRegex);
     if (urlMatch) {
@@ -96,7 +105,8 @@ export function startCloudflaredTunnel(
   child.on("error", urlRejector);
   child.on("exit", (code, signal) => {
     const reason = new Error(
-      `cloudflared exited (code=${code}, signal=${signal}) before URL was ready`,
+      `cloudflared exited (code=${code}, signal=${signal}) before URL was ready` +
+        (recentOutput.length > 0 ? `\n\n${recentOutput.join("\n")}` : ""),
     );
     urlRejector(reason);
     for (const reject of connectionRejectors) reject?.(reason);
