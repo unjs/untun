@@ -24,7 +24,7 @@
     "lint": "oxlint . && oxfmt --check src test",
     "fmt": "oxlint . --fix && oxfmt src test",
     "prepack": "pnpm run build",
-    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
+    "release": "pnpm test && pnpm build && changelogen --release && npm publish && git push --follow-tags",
     "typecheck": "tsc --noEmit",
     "test": "pnpm lint && pnpm typecheck &&  vitest run --coverage",
     "untun": "node src/cli.ts"
