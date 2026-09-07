@@ -72,7 +72,11 @@ export interface Tunnel {
  * console.log(await tunnel.getURL());
  * await tunnel.close();
  */
-export async function startTunnel(opts: TunnelOptions): Promise<undefined | Tunnel> {
+export async function startTunnel(
+  opts: TunnelOptions & { acceptCloudflareNotice: true },
+): Promise<Tunnel>;
+export async function startTunnel(opts?: TunnelOptions): Promise<undefined | Tunnel>;
+export async function startTunnel(opts: TunnelOptions = {}): Promise<undefined | Tunnel> {
   const { installCloudflared, startCloudflaredTunnel, cloudflaredBinPath, cloudflaredNotice } =
     await import("./cloudflared/index.ts");
 
