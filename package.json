@@ -8,8 +8,7 @@
     "untun": "./dist/cli.mjs"
   },
   "files": [
-    "dist",
-    "bin"
+    "dist"
   ],
   "type": "module",
   "sideEffects": false,

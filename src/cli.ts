@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { parseArgs } from "node:util";
 import pkg from "../package.json" with { type: "json" };
 import { log } from "./log.ts";
